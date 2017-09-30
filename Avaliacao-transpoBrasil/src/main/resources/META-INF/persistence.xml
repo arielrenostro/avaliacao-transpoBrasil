@@ -5,6 +5,8 @@
 	<persistence-unit name="crudPU">
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>br.com.transpobrasil.crud.model.Item</class>
+		<class>br.com.transpobrasil.crud.model.Lancamento</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/desafio" />

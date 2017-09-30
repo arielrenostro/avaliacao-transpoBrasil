@@ -34,14 +34,14 @@ public class Lancamento {
 	@Temporal(TemporalType.DATE)
 	private Date dt_final;
 	
-	@Column(name="vlr_total")
-	private double vlr_total;
+	@Column(name="vl_total")
+	private double vl_total;
 	
 	@Column(name="observacao", length=1000)
 	private String observacao;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name				  ="lancamentoitem", 
+    @JoinTable(name				  = "lancamentoitem", schema = "desafio",
                joinColumns 		  = { @JoinColumn(name = "oid_lancamento") }, 
                inverseJoinColumns = { @JoinColumn(name = "oid_item") })
 	private Set<Item> itens = new HashSet<Item>();
@@ -55,7 +55,7 @@ public class Lancamento {
 		this.id = id;
 		this.dt_inicial = dt_inicial;
 		this.dt_final = dt_final;
-		this.vlr_total = vlr_total;
+		this.vl_total = vlr_total;
 		this.observacao = observacao;
 		this.itens = itens;
 	}	
@@ -84,12 +84,12 @@ public class Lancamento {
 		this.dt_final = dt_final;
 	}
 	
-	public double getVlr_total() {
-		return this.vlr_total;
+	public double getVl_total() {
+		return this.vl_total;
 	}
 	
-	public void setVlr_total(double vlr_total) {
-		this.vlr_total = vlr_total;
+	public void setVl_total(double vl_total) {
+		this.vl_total = vl_total;
 	}
 	
 	public String getObservacao() {

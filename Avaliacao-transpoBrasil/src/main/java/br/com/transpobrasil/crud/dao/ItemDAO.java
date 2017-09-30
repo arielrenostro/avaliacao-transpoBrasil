@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 
 import br.com.transpobrasil.crud.exception.AppException;
 import br.com.transpobrasil.crud.model.Item;
-import br.com.transpobrasil.crud.model.Lancamento;
 
 public class ItemDAO {
 	

@@ -36,7 +36,6 @@
 	<classpathentry kind="lib" path="D:/Meus Documentos/Desktop/transpoBrasil/postgresql-42.1.4.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ariel/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Ariel/.m2/repository/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ariel/.m2/repository/org/jboss/weld/servlet/weld-servlet/2.4.2.Final/weld-servlet-2.4.2.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ariel/.m2/repository/org/jboss/weld/servlet/weld-servlet/weld-servlet-int.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ariel/.m2/repository/org/jboss/weld/servlet/weld-servlet/2.4.2.Final/weld-servlet-2.4.2.Final.jar" sourcepath="C:/Users/Ariel/.m2/repository/org/jboss/weld/servlet/weld-servlet/2.4.2.Final/weld-servlet-2.4.2.Final-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

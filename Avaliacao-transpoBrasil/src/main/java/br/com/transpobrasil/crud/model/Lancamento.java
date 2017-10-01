@@ -14,18 +14,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Table(name="lancamento", schema="desafio")
+@Table(name="lancamento", schema="avaliacao")
 @Entity
 public class Lancamento implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_lancamento")
+	@SequenceGenerator(name="pk_seq_lancamento",sequenceName="seq_lancamento")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pk_seq_lancamento")
 	@Column(name="oid", unique = true, nullable = false)
 	private int id;
 	
@@ -44,7 +46,7 @@ public class Lancamento implements Serializable {
 	private String observacao;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-    @JoinTable(name				  = "lancamentoitem", schema = "desafio",
+    @JoinTable(name				  = "lancamentoitem", schema = "avaliacao",
                joinColumns 		  = { @JoinColumn(name = "oid_lancamento") }, 
                inverseJoinColumns = { @JoinColumn(name = "oid_item") })
 	private Set<Item> itens = new HashSet<Item>();

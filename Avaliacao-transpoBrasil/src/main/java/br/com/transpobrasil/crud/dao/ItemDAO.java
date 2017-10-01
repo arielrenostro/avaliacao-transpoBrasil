@@ -13,7 +13,6 @@ public class ItemDAO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("cdi-ambiguous-dependency")
 	@Inject
 	private EntityManager manager;
 	
@@ -39,6 +38,6 @@ public class ItemDAO implements Serializable {
 	}
 	
 	public List<Item> listarTodos() {
-		return manager.createQuery("FROM item").getResultList();
+		return manager.createQuery("FROM Item").getResultList();
 	}
 }

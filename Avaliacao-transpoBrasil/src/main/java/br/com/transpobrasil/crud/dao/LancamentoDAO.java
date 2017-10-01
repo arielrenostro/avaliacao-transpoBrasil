@@ -38,6 +38,6 @@ public class LancamentoDAO implements Serializable {
 	}
 	
 	public List<Lancamento> listarTodos() {
-		return manager.createQuery("FROM lancamento").getResultList();
+		return manager.createQuery("FROM Lancamento").getResultList();
 	}
 }

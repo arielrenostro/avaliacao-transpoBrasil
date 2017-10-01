@@ -15,8 +15,8 @@ public class ItemMB implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Item item = new Item();
-	private int id;
+	private Item	item = new Item();
+	private int 	id;
 	
 	@Inject
 	private ItemService itemService;
@@ -35,7 +35,7 @@ public class ItemMB implements Serializable {
 	public String excluir() {
 		itemService.excluir(item);
 		return "lista-item.xhtml?faces-redirect=true";
-	}
+	} // TODO IMPLEMENTAR O RETORNO NA TELA
 	
 	public void setItem(Item i) {
 		this.item = i;

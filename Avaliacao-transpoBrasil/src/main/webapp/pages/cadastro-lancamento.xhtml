@@ -38,7 +38,6 @@
                                          action="lista-lancamento?faces-redirect=true"
                                          process="@this"
                                          icon="fa fa-close"/>
-                                         
                     </div>
                     
                     <p:splitButton value="Salvar" update="@form"
@@ -59,61 +58,85 @@
                     <p:separator/>
 
                     <div class="ui-fluid">
-                    	<p:panelGrid id="capaPanel" columns="4" layout="grid">
+                    	<p:panelGrid id="capaPanel" columns="6" layout="grid">
 							<p:outputLabel for="dt_inicial" value="Data Inicial" />
-        					<p:calendar id="dt_inicial" value="#{lancamentoMB.lancamento.dt_inicial}" showOn="button" pattern="dd/MM/yyyy" mask="99/99/9999"/>
+        					<p:calendar id="dt_inicial" value="#{lancamentoMB.lancamento.dt_inicial}" showOn="button" pattern="dd/MM/yyyy" mask="99/99/9999">
+        						<f:validateLength minimum="10" />
+        					</p:calendar>
 							
 							<p:outputLabel value="Data Final" for="dt_final"/>
 							<p:calendar id="dt_final" value="#{lancamentoMB.lancamento.dt_final}" showOn="button" pattern="dd/MM/yyyy" mask="99/99/9999"/>
 							
-							<p:outputLabel value="Observação" for="observacao"/>
-    						<p:inputTextarea id="observacao" rows="6" cols="33" />	
+							<p:outputLabel value="Valor Total" for="vl_total"/>
+    						<p:inputText id="vl_total" value="#{lancamentoMB.lancamento.vl_total}" readonly="true" style="text-align: right">
+	                        	<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ #####,##" />
+	                        </p:inputText>
+                    	</p:panelGrid>
+                    	
+                    	<div>
+	                    	<p:outputLabel value="Observação" for="observacao"/>
+	    					<p:inputTextarea id="observacao" value="#{lancamentoMB.lancamento.observacao}" rows="6" cols="33" />	
+    					</div>
+    					
+    					<br/>
+    					
+    					<p:outputLabel value="Adicionar Item" for="panelAdicionarItem"/>
+    					<p:panelGrid id="panelAdicionarItem" columns="6">
+    						<p:outputLabel value="ID:" for="novo_item_id"/>
+    						<p:autoComplete id="novo_item_id" dropdown="true" value="#{lancamentoMB.itemAdicionarId}" completeMethod="#{lancamentoMB.completarItemAdicionar}" />
     						
-    						<p:outputLabel value="Valor Total" for="vl_total"/>
-    						<p:inputText id="vl_total" value="#{lancamentoMB.lancamento.vl_total}" readonly="true"/>
-    						
-    						<p:dataTable id="itemTable" widgetVar="itemTable" rows="10"
-	                    			 value="#{lancamentoMB.itens}" var="item" rowKey="#{item.id}"	                    			 
+    						<p:commandButton id="btAdicionarItem" 
+    										 value="Adicionar Item" 
+    										 icon="fa fa-plus-square" 
+    										 class="btn-primary" 
+    										 style="width:auto"
+    										 action="#{lancamentoMB.adicionarItem()}">
+    							<f:ajax execute="@form" render="@form" />
+    						</p:commandButton>
+    					</p:panelGrid>
+    					
+    					<br/>
+    					
+   						<p:outputLabel for="itemTable" value="Itens" />
+   						<p:dataTable id="itemTable" widgetVar="itemTable" rows="10"
+	                    			 value="#{lancamentoMB.lancamento.itens}" var="item" rowKey="#{item.id}"	                    			 
 	                                 paginator="true"
 	                                 paginatorPosition="bottom"	                                 
 	                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
 	                                 currentPageReportTemplate=""
 	                                 rowsPerPageTemplate="5,10,15,20,30">
-	                                 
-		                        <p:column headerText="ID"
-		                        		  filterBy="#{item.id}" filterMatchMode="contains"
-		                        		  sortBy="#{item.id}">
-		                        	<h:outputLabel value="#{item.id}" />
-		                        </p:column> 
-		                        
-		                        <p:column headerText="Descrição"
-		                        		  filterBy="#{item.descricao}" filterMatchMode="contains"
-		                        		  sortBy="#{item.descricao}">
-		                       		<h:outputLabel value="#{item.descricao}" />
-		                        </p:column>	               
-		                        
-		                        <p:column headerText="Valor"
-		                        		  filterBy="#{item.valor}" filterMatchMode="contains"
-		                        		  sortBy="#{item.valor}">
-		                        	<h:outputLabel value="#{item.valor}" />
-		                        </p:column>     
-	
- 								<p:column headerText="Excluir">
-		                        	<p:commandButton icon="fa fa-fw fa-trash" 
-		                        					 update="#{lancamentoMB.excluirItem(item)}" 
-		                        					  />
-		                        </p:column>    
-		                        	
-		                    </p:dataTable>
+                                 
+	                        <p:column headerText="ID"
+	                        		  filterBy="#{item.id}" filterMatchMode="contains"
+	                        		  sortBy="#{item.id}" width="5%">
+	                        	<h:outputLabel value="#{item.id}" style="display:block; text-align:center"/>
+	                        </p:column> 
+	                        
+	                        <p:column headerText="Descrição"
+	                        		  filterBy="#{item.descricao}" filterMatchMode="contains"
+	                        		  sortBy="#{item.descricao}">
+	                       		<h:outputLabel value="#{item.descricao}" />
+	                        </p:column>	               
+	                        
+	                        <p:column headerText="Valor"
+	                        		  filterBy="#{item.valor}" filterMatchMode="contains"
+	                        		  sortBy="#{item.valor}" width="10%">
+	                        	<h:outputLabel value="#{item.valor}" style="float: right">
+	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ #####,##" />
+	                        	</h:outputLabel>
+	                        </p:column>     
 
-                    	</p:panelGrid>
-
+								<p:column headerText="Excluir" width="10%">
+	                        	 <p:commandButton icon="fa fa-fw fa-trash" action="#{lancamentoMB.excluirItem(item)}">
+	                        		<f:ajax execute="@form" render="@form" />
+	                        	</p:commandButton> 
+	                        </p:column>    
+	                        	
+	                    </p:dataTable>
                     </div>
+                    
                 </div>
             </div>
         </h:form>
-
     </ui:define>
-                
-                
 </ui:composition>

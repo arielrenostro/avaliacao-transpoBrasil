@@ -57,13 +57,11 @@
 	                    
 	                    <p:dataTable id="itemTable" widgetVar="itemTable" rows="10"
 	                    			 value="#{listaItemMB.itens}" var="item" rowKey="#{item.id}"	                    			 
-	                                 paginator="true" selection="#{listaItemMB.itensSelecionados}" 	                                 
+	                                 paginator="true" selection="#{listaItemMB.itensSelecionados}"
 	                                 paginatorPosition="bottom"	                                 
 	                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
 	                                 currentPageReportTemplate=""
 	                                 rowsPerPageTemplate="5,10,15,20,30">
-	
-	
 	
 	                        <p:column selectionMode="multiple" width="5%" styleClass="align-center"/>
 	                        
@@ -78,7 +76,9 @@
 	                        <p:column headerText="Valor"
 	                        		  filterBy="#{item.valor}" filterMatchMode="contains"
 	                        		  sortBy="#{item.valor}">
-	                        	<h:outputLabel value="#{item.valor}" />
+	                        	<h:outputLabel value="#{item.valor}">
+	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ #####,##" />
+	                        	</h:outputLabel>
 	                        </p:column>         
 	                        	
 	                    </p:dataTable>

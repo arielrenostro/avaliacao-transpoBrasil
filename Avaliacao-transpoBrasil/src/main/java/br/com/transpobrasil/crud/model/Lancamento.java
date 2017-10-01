@@ -1,9 +1,9 @@
 package br.com.transpobrasil.crud.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ public class Lancamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name="pk_seq_lancamento", sequenceName="seq_lancamento", schema="avaliacao")
+	@SequenceGenerator(name="pk_seq_lancamento", sequenceName="seq_lancamento", schema="avaliacao", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pk_seq_lancamento")
 	@Column(name="oid", unique = true, nullable = false)
 	private int id;
@@ -49,13 +49,13 @@ public class Lancamento implements Serializable {
     @JoinTable(name				  = "lancamentoitem", schema = "avaliacao",
                joinColumns 		  = { @JoinColumn(name = "oid_lancamento") }, 
                inverseJoinColumns = { @JoinColumn(name = "oid_item") })
-	private Set<Item> itens = new HashSet<Item>();
+	private List<Item> itens = new ArrayList<Item>();
 	
 	public Lancamento() {
 		super();
 	}
 	
-	public Lancamento(int id, Date dt_inicial, Date dt_final, double vlr_total, String observacao,	Set<Item> itens) {
+	public Lancamento(int id, Date dt_inicial, Date dt_final, double vlr_total, String observacao,	List<Item> itens) {
 		super();
 		this.id = id;
 		this.dt_inicial = dt_inicial;
@@ -105,11 +105,11 @@ public class Lancamento implements Serializable {
 		this.observacao = observacao;
 	}
 	
-	public Set<Item> getItens() {
+	public List<Item> getItens() {
 		return this.itens;
 	}
 	
-	public void setItens(Set<Item> itens) {
+	public void setItens(List<Item> itens) {
 		this.itens = itens;
 	}
 	

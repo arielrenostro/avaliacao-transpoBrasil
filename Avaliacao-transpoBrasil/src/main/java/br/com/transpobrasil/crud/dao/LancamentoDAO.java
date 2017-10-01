@@ -44,20 +44,6 @@ public class LancamentoDAO implements Serializable {
 		}
 	}
 	
-	/*public void excluirItem(Item i) {
-		
-		try {
-			
-			manager.getTransaction().begin();
-			manager.remove(i);
-			manager.flush();
-			manager.getTransaction().commit();
-			
-		} catch (Exception e) {
-			throw new AppException("Falha ao excluir item do lançamento !");
-		}
-	}*/
-	
 	public Lancamento porId(int id) {
 		return manager.find(Lancamento.class, id);
 	}

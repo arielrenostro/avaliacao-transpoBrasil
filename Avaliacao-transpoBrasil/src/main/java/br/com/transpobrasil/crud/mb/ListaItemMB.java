@@ -18,14 +18,13 @@ import br.com.transpobrasil.crud.service.ItemService;
 public class ListaItemMB implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Inject
 	private ItemService itemService;
 	
-	private List<Item> itens = new ArrayList<Item>();
+	private List<Item> itens 				= new ArrayList<Item>();
+	private List<Item> itensSelecionados 	= new ArrayList<Item>();
 	
-	private List<Item> itensSelecionados = new ArrayList<Item>();
-
 	@PostConstruct
 	public void init() {
 		itens = itemService.listarTodos();		
@@ -36,20 +35,20 @@ public class ListaItemMB implements Serializable {
 			itemService.excluir(item);
 			itens.remove(item);
 		}
-	}
-
+	} // TODO IMPLEMENTAR O RETORNO NA TELA
+	
 	public List<Item> getItens() {
 		return itens;
 	}
-
+	
 	public void setItens(List<Item> itens) {
 		this.itens = itens;
 	}
-
+	
 	public List<Item> getItensSelecionados() {
 		return itensSelecionados;
 	}
-
+	
 	public void setItensSelecionados(List<Item> itensSelecionados) {
 		this.itensSelecionados = itensSelecionados;
 	}

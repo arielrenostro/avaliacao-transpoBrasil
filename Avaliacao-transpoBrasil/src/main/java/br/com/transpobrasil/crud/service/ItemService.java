@@ -9,7 +9,6 @@ import br.com.transpobrasil.crud.model.Item;
 
 public class ItemService {
 
-	
 	@Inject
 	private ItemDAO itemDAO;
 	

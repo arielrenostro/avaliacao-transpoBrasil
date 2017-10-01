@@ -2,12 +2,14 @@ package br.com.transpobrasil.crud.dao;
 
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.transpobrasil.crud.exception.AppException;
 import br.com.transpobrasil.crud.model.Lancamento;
 
+@RequestScoped
 public class LancamentoDAO {
 
 	@Inject

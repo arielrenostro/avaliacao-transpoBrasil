@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="head-end">
+        <style type="text/css">
+            .ui-grid-row .ui-grid-col-2,
+            .ui-grid-row .ui-grid-col-10 {
+                padding: 0.5em 0;
+                margin-left: 10px;
+            }
+
+            .ui-orderlist .ui-orderlist-list {
+                height: auto;
+            }
+
+            .ui-orderlist .ui-grid-row .ui-grid-col-2,
+            .ui-orderlist .ui-grid-row .ui-grid-col-10 {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="title">
+        Pesquisa Item
+    </ui:define>
+
+    <ui:define name="description">
+        Pesquise os itens cadastrados, adicione novos itens ou exclua itens
+    </ui:define>
+
+    <ui:define name="body">
+        <adm:breadcrumb title="Pesquisa Item"/>
+
+			<h:form>
+            	<div class="box box-primary">
+                	<div class="box-header with-border">
+                    	<p:commandButton action="cadastro-item?faces-redirect=true" ajax="false" icon="fa fa-plus"
+                         	            value="Novo" styleClass="btn-primary"/>
+                    	<p:spacer width="5"/>
+	                    <p:commandButton value="Excluir Selecionado(s)" icon="fa fa-trash" styleClass="btn-danger"
+	                                     action="#{listaItemMB.excluirSelecionados()}" 
+	                                     process="@form" update="@form"/>
+	                                     
+	                    <p:spacer width="5"/>
+	                    <p:commandButton value="Olhar Selecionado(s)" 
+	                    				 oncomplete="PF('itensSelecionados').show()"
+	                    				 update="@(.ui-dialog)" 
+	                    				 styleClass="btn-info"
+	                                     icon="fa fa-search"/>
+	                    <p:separator/>
+	                    
+	                    
+	                    <p:dataTable id="itemTable" widgetVar="itemTable" rows="10"
+	                    			 value="#{listaItemMB.tarefas}" var="item" rowKey="#{item.id}"	                    			 
+	                                 paginator="true" selection="#{listaItemMB.itensSelecionados}" 	                                 
+	                                 paginatorPosition="bottom"	                                 
+	                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+	                                 currentPageReportTemplate=""
+	                                 rowsPerPageTemplate="5,10,15,20,30">
+	
+	
+	
+	                        <p:column selectionMode="multiple" width="5%" styleClass="align-center"/>
+	                        
+	                        <p:column headerText="Descrição"
+	                        		  filterBy="#{item.descricao}" filterMatchMode="contains"
+	                        		  sortBy="#{item.descricao}">
+	                        	<h:link value="#{item.descricao}" outcome="cadastro-item.xhtml">
+	                        		<f:param name="id" value="#{item.id}"/>
+	                        	</h:link>
+	                        </p:column>	               
+	                        
+	                        <p:column headerText="Valor"
+	                        		  filterBy="#{item.valor}" filterMatchMode="contains"
+	                        		  sortBy="#{item.valor}">
+	                        	<h:outputLabel value="#{item.valor}" />
+	                        </p:column>         
+	                        	
+	                    </p:dataTable>
+					</div>
+	            </div>
+        	</h:form>
+        	
+        	<p:dialog header="Itens Selecionados" widgetVar="itensSelecionados" height="250"
+                  	  width="400" responsive="true" styleClass="box-success">
+	            <p:dataList id="listaItensSelecionados" value="#{listaTarefaMB.itensSelecionados}" var="tarefa"
+	                        type="definition">
+	                        
+	                        ID: #{item.id} - Descrição: #{item.descricao} - Valor: #{item.valor}
+
+	            </p:dataList>
+			</p:dialog>
+
+        
+    </ui:define>
+
+</ui:composition>

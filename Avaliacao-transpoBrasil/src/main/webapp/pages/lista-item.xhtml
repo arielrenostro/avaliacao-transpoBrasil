@@ -75,9 +75,10 @@
 	                        
 	                        <p:column headerText="Valor"
 	                        		  filterBy="#{item.valor}" filterMatchMode="contains"
-	                        		  sortBy="#{item.valor}">
-	                        	<h:outputLabel value="#{item.valor}">
-	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ #####,##" />
+	                        		  sortBy="#{item.valor}"
+	                        		  width="20%">
+	                        	<h:outputLabel value="#{item.valor}" style="float: right" decimalSeparator="," thousandSeparator=".">
+	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ 0.00" />
 	                        	</h:outputLabel>
 	                        </p:column>         
 	                        	
@@ -91,7 +92,10 @@
 	            <p:dataList id="listaItensSelecionados" value="#{listaItemMB.itensSelecionados}" var="item"
 	                        type="definition">
 	                        
-	                        ID: #{item.id} - Descrição: #{item.descricao} - Valor: #{item.valor}
+	                        ID: #{item.id} - Descrição: #{item.descricao} - Valor: 
+	                        <h:outputLabel value="#{item.valor}" decimalSeparator="," thousandSeparator=".">
+	                        	<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ 0.00" />
+	                        </h:outputLabel>
 
 	            </p:dataList>
 			</p:dialog>

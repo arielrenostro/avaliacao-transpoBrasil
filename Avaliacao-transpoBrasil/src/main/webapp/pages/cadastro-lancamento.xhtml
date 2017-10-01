@@ -68,8 +68,8 @@
 							<p:calendar id="dt_final" value="#{lancamentoMB.lancamento.dt_final}" showOn="button" pattern="dd/MM/yyyy" mask="99/99/9999"/>
 							
 							<p:outputLabel value="Valor Total" for="vl_total"/>
-    						<p:inputText id="vl_total" value="#{lancamentoMB.lancamento.vl_total}" readonly="true" style="text-align: right">
-	                        	<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ #####,##" />
+    						<p:inputText id="vl_total" value="#{lancamentoMB.lancamento.vl_total}" readonly="true" style="text-align: right" decimalSeparator="," thousandSeparator=".">
+	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ 0.00" />
 	                        </p:inputText>
                     	</p:panelGrid>
                     	
@@ -121,8 +121,8 @@
 	                        <p:column headerText="Valor"
 	                        		  filterBy="#{item.valor}" filterMatchMode="contains"
 	                        		  sortBy="#{item.valor}" width="10%">
-	                        	<h:outputLabel value="#{item.valor}" style="float: right">
-	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ #####,##" />
+	                        	<h:outputLabel value="#{item.valor}" style="float: right" decimalSeparator="," thousandSeparator=".">
+	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ 0.00" />
 	                        	</h:outputLabel>
 	                        </p:column>     
 

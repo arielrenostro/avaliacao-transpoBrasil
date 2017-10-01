@@ -2,6 +2,8 @@ package br.com.transpobrasil.crud.mb;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,9 +35,14 @@ public class ItemMB implements Serializable {
 	}
 	
 	public String excluir() {
-		itemService.excluir(item);
-		return "lista-item.xhtml?faces-redirect=true";
-	} // TODO IMPLEMENTAR O RETORNO NA TELA
+		try {
+			itemService.excluir(item);
+			return "lista-item.xhtml?faces-redirect=true";
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage(), ""));
+			return null;
+		}
+	}
 	
 	public void setItem(Item i) {
 		this.item = i;

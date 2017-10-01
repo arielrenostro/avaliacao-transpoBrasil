@@ -75,9 +75,14 @@ public class LancamentoMB implements Serializable {
 	}
 	
 	public String excluir() {
-		this.lancamentoService.excluir(lancamento);
-		return "lista-lancamento.xhtml?faces-redirect=true";
-	} // TODO IMPLEMENTAR O RETORNO NA TELA
+		try {
+			this.lancamentoService.excluir(lancamento);
+			return "lista-lancamento.xhtml?faces-redirect=true";
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage(), ""));
+			return null;
+		}
+	}
 	
 	public void setLancamento(Lancamento i) {
 		this.lancamento = i;

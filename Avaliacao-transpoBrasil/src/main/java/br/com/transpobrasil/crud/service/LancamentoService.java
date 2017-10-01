@@ -17,6 +17,9 @@ public class LancamentoService implements Serializable {
 	LancamentoDAO lancamentoDAO;
 	
 	public void salvar(Lancamento l) {
+		
+		updateValorItens(l);
+		
 		if(l.getId() > 0)
 			lancamentoDAO.update(l);
 		else

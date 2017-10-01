@@ -87,8 +87,8 @@
 	                        <p:column headerText="Valor"
 	                        		  filterBy="#{lancamento.vl_total}" filterMatchMode="contains"
 	                        		  sortBy="#{lancamento.vl_total}">
-	                        	<h:outputLabel value="#{lancamento.vl_total}" style="float: right">
-	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ #####,##" />
+	                        	<h:outputLabel value="#{lancamento.vl_total}" style="float: right" decimalSeparator="," thousandSeparator=".">
+	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ 0.00" />
 	                        	</h:outputLabel>
 	                        </p:column>
 	                        
@@ -117,8 +117,8 @@
 		                        	<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputLabel> -
 							Valor:
-								<h:outputLabel value="#{lancamento.vl_total}">
-									<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ #####,##" />
+								<h:outputLabel value="#{lancamento.vl_total}" decimalSeparator="," thousandSeparator=".">
+	                        		<f:convertNumber minIntegerDigits="1" minFractionDigits="2" pattern="R$ 0.00" />
 								</h:outputLabel>
 							<br />
 							Observação:
@@ -126,7 +126,6 @@
 							<br />
 	            </p:dataList>
 			</p:dialog>
-
         
     </ui:define>
 

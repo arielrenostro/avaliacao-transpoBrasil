@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,11 +34,15 @@ public class ListaLancamentoMB implements Serializable {
 	}
 	
 	public void excluirSelecionados() {
-		for (Lancamento lancamento : lancamentosSelecionados) {
-			lancamentoService.excluir(lancamento);
-			lancamentos.remove(lancamento);
+		try {
+			for (Lancamento lancamento : lancamentosSelecionados) {
+				lancamentoService.excluir(lancamento);
+				lancamentos.remove(lancamento);
+			}
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.getMessage(), ""));
 		}
-	} // TODO IMPLEMENTAR O RETORNO NA TELA
+	}
 
 	public List<Lancamento> getLancamentos() {
 		return lancamentos;

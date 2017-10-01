@@ -26,7 +26,7 @@ public class Lancamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name="pk_seq_lancamento",sequenceName="seq_lancamento")
+	@SequenceGenerator(name="pk_seq_lancamento", sequenceName="seq_lancamento", schema="avaliacao")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pk_seq_lancamento")
 	@Column(name="oid", unique = true, nullable = false)
 	private int id;

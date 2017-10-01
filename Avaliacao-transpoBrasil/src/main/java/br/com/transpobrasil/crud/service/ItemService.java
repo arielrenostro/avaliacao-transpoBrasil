@@ -15,8 +15,13 @@ public class ItemService implements Serializable {
 	@Inject
 	private ItemDAO itemDAO;
 	
-	public Item salvar(Item i) {
-		return itemDAO.salvar(i);
+	public void salvar(Item i) {
+		
+		if(i.getId() > 0) {
+			itemDAO.update(i);
+		} else {
+			itemDAO.salvar(i);
+		}
 	}
 	
 	public void excluir(Item i) {

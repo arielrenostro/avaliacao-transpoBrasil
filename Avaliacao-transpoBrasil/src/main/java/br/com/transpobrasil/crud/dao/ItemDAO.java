@@ -16,8 +16,16 @@ public class ItemDAO implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
-	public Item salvar(Item i) {
-		return manager.merge(i);
+	public void update(Item i) {
+		manager.getTransaction().begin();
+		manager.merge(i);
+		manager.getTransaction().commit();
+	}
+	
+	public void salvar(Item i) {
+		manager.getTransaction().begin();
+		manager.persist(i);
+		manager.getTransaction().commit();
 	}
 
 	public void excluir(Item i) {
@@ -25,8 +33,10 @@ public class ItemDAO implements Serializable {
 		try {
 			
 			i = porId(i.getId());
+			manager.getTransaction().begin();
 			manager.remove(i);
 			manager.flush();
+			manager.getTransaction().commit();
 			
 		} catch (Exception e) {
 			throw new AppException("Falha ao excluir o item !");

@@ -27,14 +27,14 @@ public class ItemMB implements Serializable {
 		}
 	}
 	
-	public String salvar(Item i) {
-		itemService.salvar(i);
-		return "item.xhtml?faces-redirect=true";
+	public String salvar() {
+		itemService.salvar(item);
+		return "lista-item.xhtml?faces-redirect=true";
 	}
 	
-	public String excluir(Item i) {
-		itemService.excluir(i);
-		return "item.xhtml?faces-redirect=true";
+	public String excluir() {
+		itemService.excluir(item);
+		return "lista-item.xhtml?faces-redirect=true";
 	}
 	
 	public void setItem(Item i) {

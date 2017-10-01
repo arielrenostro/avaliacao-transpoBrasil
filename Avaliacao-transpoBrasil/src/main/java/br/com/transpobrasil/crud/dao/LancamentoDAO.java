@@ -1,17 +1,18 @@
 package br.com.transpobrasil.crud.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.transpobrasil.crud.exception.AppException;
 import br.com.transpobrasil.crud.model.Lancamento;
 
-@RequestScoped
-public class LancamentoDAO {
+public class LancamentoDAO implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private EntityManager manager;
 	

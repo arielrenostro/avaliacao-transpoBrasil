@@ -1,5 +1,7 @@
 package br.com.transpobrasil.crud.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,10 @@ import javax.persistence.Table;
 
 @Table(name="item", schema="desafio")
 @Entity
-public class Item {
-	
+public class Item implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_item")
 	@Column(name="oid", unique = true, nullable = false)

@@ -1,5 +1,7 @@
 package br.com.transpobrasil.crud.mb;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +15,10 @@ import br.com.transpobrasil.crud.service.ItemService;
 
 @Named
 @ViewScoped
-public class ListaItemMB {
+public class ListaItemMB implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private ItemService itemService;
 	

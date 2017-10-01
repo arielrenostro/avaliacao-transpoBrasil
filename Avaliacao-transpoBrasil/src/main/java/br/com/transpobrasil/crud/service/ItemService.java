@@ -1,5 +1,6 @@
 package br.com.transpobrasil.crud.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,8 +8,10 @@ import javax.inject.Inject;
 import br.com.transpobrasil.crud.dao.ItemDAO;
 import br.com.transpobrasil.crud.model.Item;
 
-public class ItemService {
+public class ItemService implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Inject
 	private ItemDAO itemDAO;
 	

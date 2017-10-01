@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="title">
+        Cadastro Lançamento
+    </ui:define>
+    
+    <ui:define name="body">
+        <f:metadata>
+        	<f:viewParam name="id" value="#{lancamentoMB.id}" converter="javax.faces.Long"/>
+        	<f:event listener="#{lancamentoMB.init()}" type="preRenderView"></f:event>
+        </f:metadata>
+
+        <adm:breadcrumb title="Cadastro do Lançamento #{lancamentoMB.lancamento.id}" link="cadastro-lancamento.xhtml?id=#{lancamentoMB.lancamento.id}"/>
+        <h:form id="form" prependId="false">
+            <p:focus/>
+			
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons" class="hidden-sm hidden-xs">
+                        <p:commandButton value="Salvar" update="@form"
+                        				 action="#{lancamentoMB.salvar()}"
+                                         icon="fa fa-check" styleClass="btn-primary"/>
+                        <p:spacer width="5"/>
+
+                        <p:commandButton value="Excluir" process="@this"
+                                         icon="fa fa-trash"
+                                         action="#{lancamentoMB.excluir()}"
+                                         styleClass="btn-danger">
+                        </p:commandButton>
+                        <p:spacer width="5"/>
+                        <p:commandButton value="Voltar"
+                                         action="lista-lancamento?faces-redirect=true"
+                                         process="@this"
+                                         icon="fa fa-close"/>
+                                         
+                    </div>
+                    
+                    <p:splitButton value="Salvar" update="@form"
+                    			   action="#{lancamentoMB.salvar()}"
+                                   icon="fa fa-check"
+                                   styleClass="hidden-md hidden-lg btn-primary">
+                        <p:menuitem value="Excluir"
+                        			action="#{lancamentoMB.excluir()}"
+                                    process="@this"
+                                    icon="fa fa-trash"/>
+                        <p:separator/>
+                        <p:menuitem value="Voltar"                        			
+                        		    action="lista-lancamento?faces-redirect=true" 
+                        			process="@this"
+                                    icon="fa fa-close"/>
+                    </p:splitButton>
+
+                    <p:separator/>
+
+                    <div class="ui-fluid">
+                    	<p:panelGrid id="capaPanel" columns="4" layout="grid">
+							<p:outputLabel for="dt_inicial" value="Data Inicial" />
+        					<p:calendar id="dt_inicial" value="#{lancamentoMB.lancamento.dt_inicial}" showOn="button" pattern="dd/MM/yyyy" mask="99/99/9999"/>
+							
+							<p:outputLabel value="Data Final" for="dt_final"/>
+							<p:calendar id="dt_final" value="#{lancamentoMB.lancamento.dt_final}" showOn="button" pattern="dd/MM/yyyy" mask="99/99/9999"/>
+							
+							<p:outputLabel value="Observação" for="observacao"/>
+    						<p:inputTextarea id="observacao" rows="6" cols="33" />	
+    						
+    						<p:outputLabel value="Valor Total" for="vl_total"/>
+    						<p:inputText id="vl_total" value="#{lancamentoMB.lancamento.vl_total}" readonly="true"/>
+    						
+    						<p:dataTable id="itemTable" widgetVar="itemTable" rows="10"
+	                    			 value="#{lancamentoMB.itens}" var="item" rowKey="#{item.id}"	                    			 
+	                                 paginator="true"
+	                                 paginatorPosition="bottom"	                                 
+	                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+	                                 currentPageReportTemplate=""
+	                                 rowsPerPageTemplate="5,10,15,20,30">
+	                                 
+		                        <p:column headerText="ID"
+		                        		  filterBy="#{item.id}" filterMatchMode="contains"
+		                        		  sortBy="#{item.id}">
+		                        	<h:outputLabel value="#{item.id}" />
+		                        </p:column> 
+		                        
+		                        <p:column headerText="Descrição"
+		                        		  filterBy="#{item.descricao}" filterMatchMode="contains"
+		                        		  sortBy="#{item.descricao}">
+		                       		<h:outputLabel value="#{item.descricao}" />
+		                        </p:column>	               
+		                        
+		                        <p:column headerText="Valor"
+		                        		  filterBy="#{item.valor}" filterMatchMode="contains"
+		                        		  sortBy="#{item.valor}">
+		                        	<h:outputLabel value="#{item.valor}" />
+		                        </p:column>     
+	
+ 								<p:column headerText="Excluir">
+		                        	<p:commandButton icon="fa fa-fw fa-trash" 
+		                        					 update="#{lancamentoMB.excluirItem(item)}" 
+		                        					  />
+		                        </p:column>    
+		                        	
+		                    </p:dataTable>
+
+                    	</p:panelGrid>
+
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+                
+                
+</ui:composition>

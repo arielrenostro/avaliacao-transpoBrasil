@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.transpobrasil.crud.exception.AppException;
+import br.com.transpobrasil.crud.model.Item;
 import br.com.transpobrasil.crud.model.Lancamento;
 
 public class LancamentoDAO implements Serializable {
@@ -16,8 +17,16 @@ public class LancamentoDAO implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
-	public Lancamento salvar(Lancamento l) {
-		return manager.merge(l);
+	public void salvar(Lancamento l) {
+		manager.getTransaction().begin();
+		manager.persist(l);
+		manager.getTransaction().commit();
+	}
+	
+	public void update(Lancamento l) {
+		manager.getTransaction().begin();
+		manager.merge(l);
+		manager.getTransaction().commit();
 	}
 	
 	public void excluir(Lancamento l) {
@@ -25,13 +34,29 @@ public class LancamentoDAO implements Serializable {
 		try {
 			
 			l = porId(l.getId());
+			manager.getTransaction().begin();
 			manager.remove(l);
 			manager.flush();
+			manager.getTransaction().commit();
 			
 		} catch (Exception e) {
 			throw new AppException("Falha ao excluir lançamento !");
 		}
 	}
+	
+	/*public void excluirItem(Item i) {
+		
+		try {
+			
+			manager.getTransaction().begin();
+			manager.remove(i);
+			manager.flush();
+			manager.getTransaction().commit();
+			
+		} catch (Exception e) {
+			throw new AppException("Falha ao excluir item do lançamento !");
+		}
+	}*/
 	
 	public Lancamento porId(int id) {
 		return manager.find(Lancamento.class, id);

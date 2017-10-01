@@ -56,7 +56,7 @@
 	                    
 	                    
 	                    <p:dataTable id="itemTable" widgetVar="itemTable" rows="10"
-	                    			 value="#{listaItemMB.tarefas}" var="item" rowKey="#{item.id}"	                    			 
+	                    			 value="#{listaItemMB.itens}" var="item" rowKey="#{item.id}"	                    			 
 	                                 paginator="true" selection="#{listaItemMB.itensSelecionados}" 	                                 
 	                                 paginatorPosition="bottom"	                                 
 	                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
@@ -88,7 +88,7 @@
         	
         	<p:dialog header="Itens Selecionados" widgetVar="itensSelecionados" height="250"
                   	  width="400" responsive="true" styleClass="box-success">
-	            <p:dataList id="listaItensSelecionados" value="#{listaTarefaMB.itensSelecionados}" var="tarefa"
+	            <p:dataList id="listaItensSelecionados" value="#{listaItemMB.itensSelecionados}" var="item"
 	                        type="definition">
 	                        
 	                        ID: #{item.id} - Descrição: #{item.descricao} - Valor: #{item.valor}
